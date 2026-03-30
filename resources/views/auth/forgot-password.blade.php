@@ -1,25 +1,33 @@
-<x-guest-layout>
-    <div class="mb-4 text-sm text-gray-600 dark:text-gray-400">
-        {{ __('Forgot your password? No problem. Just let us know your email address and we will email you a password reset link that will allow you to choose a new one.') }}
-    </div>
+@extends('auth.auth-layout')
 
-    <!-- Session Status -->
-    <x-auth-session-status class="mb-4" :status="session('status')" />
+@section('title', 'Page de réinitialisation du mot de passe')
 
-    <form method="POST" action="{{ route('password.email') }}">
-        @csrf
+@section('card_title', 'Réinitialiser le mot de passe')
 
-        <!-- Email Address -->
-        <div>
-            <x-input-label for="email" :value="__('Email')" />
-            <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus />
-            <x-input-error :messages="$errors->get('email')" class="mt-2" />
-        </div>
+@section('auth_form')
 
-        <div class="flex items-center justify-end mt-4">
-            <x-primary-button>
-                {{ __('Email Password Reset Link') }}
-            </x-primary-button>
-        </div>
-    </form>
-</x-guest-layout>
+                <form action="{{ route('password.email') }}" method="POST">
+                    @csrf
+                    <div class="form-group">
+                        <label class="form-label" for="email">Adresse Email</label>
+                        <input type="email" id="email" name="email" class="form-input" placeholder="Entrer votre adresse email liée à votre compte" required>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">
+                        Réinitialiser le mot de passe
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="5" y1="12" x2="19" y2="12"/>
+                            <polyline points="12 5 19 12 12 19"/>
+                        </svg>
+                    </button>
+                </form>
+
+                <p class="login-footer" style="margin-top: 1rem;">
+                    Connectez-vous <a href="{{ route('login') }}">ici</a>
+                </p>
+
+                <p class="login-footer" style="margin-top: 1rem;">
+                    Inscription <a href="{{ route('register') }}">ici</a>
+                </p>
+                
+@endsection
