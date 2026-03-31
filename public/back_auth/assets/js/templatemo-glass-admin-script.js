@@ -96,6 +96,11 @@
         requestAnimationFrame(update);
     }
 
+    function updateFileName(input) {
+        const fileName = input.files[0] ? input.files[0].name : "Choisir une image";
+            document.getElementById('file-name-text').textContent = fileName;
+    }
+
     function initCounters() {
         const counters = document.querySelectorAll('.stat-value');
         counters.forEach(counter => {
