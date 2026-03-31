@@ -10,7 +10,7 @@
             <span class="nav-section-title">Main Menu</span>
             <ul>
                 <li class="nav-item">
-                    <a href="index.html" class="nav-link active">
+                    <a href="index.html" class="nav-link">
                         <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                             <rect x="3" y="3" width="7" height="7" rx="1"/>
                             <rect x="14" y="3" width="7" height="7" rx="1"/>
@@ -28,7 +28,7 @@
                             <path d="M2 12l10 5 10-5"/>
                         </svg>
                         Analytics
-                        <span class="nav-badge">New</span>
+                        {{-- <span class="nav-badge">New</span> --}}
                     </a>
                 </li>
                 <li class="nav-item">
@@ -43,29 +43,34 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="settings.html" class="nav-link">
+                    <a href="{{ route('profile.edit') }}" class="nav-link">
                         <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <circle cx="12" cy="12" r="3"/>
-                            <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/>
-                        </svg>
-                        Settings
+                            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                            <circle cx="9" cy="7" r="4"/>
+                            <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+                            <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+                        </svg>  
+                        Profile
                     </a>
                 </li>
             </ul>
         </li>
 
         <li class="nav-section">
-            <span class="nav-section-title">Account</span>
+            <span class="nav-section-title">Compte</span>
             <ul>
                 <li class="nav-item">
-                    <a href="login.html" class="nav-link">
-                        <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/>
-                            <polyline points="16 17 21 12 16 7"/>
-                            <line x1="21" y1="12" x2="9" y2="12"/>
-                        </svg>
-                        Logout
-                    </a>
+                    <form method="POST" action="{{ route('logout') }}">
+                        @csrf
+                        <a href="{{ route('logout') }}" class="nav-link" onclick="event.preventDefault(); this.closest('form').submit();">
+                            <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/>
+                                <polyline points="16 17 21 12 16 7"/>
+                                <line x1="21" y1="12" x2="9" y2="12"/>
+                            </svg>
+                            Déconnexion
+                        </a>
+                    </form>
                 </li>
             </ul>
         </li>
@@ -73,10 +78,15 @@
 
     <div class="sidebar-footer">
         <div class="user-profile">
-            <div class="user-avatar">TM</div>
+            <div class="profile-avatar-sidebar">
+                <a href="{{ Auth::user()->image ? asset('back_auth/assets/profile/' . Auth::user()->image) : '#' }}" target="_blank">
+                    <img src="{{ Auth::user()->image ? asset('back_auth/assets/profile/' . Auth::user()->image) : 'https://ui-avatars.com/api/?name='.urlencode(Auth::user()->name).'&size=150&background=random' }}" 
+                    alt="Photo de profil">
+                </a>
+            </div>
             <div class="user-info">
-                <div class="user-name">TemplateMo</div>
-                <div class="user-role">Administrator</div>
+                <div class="user-name">{{ Auth::user()->name }}</div>
+                <div class="user-role">Administrateur</div>
             </div>
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <polyline points="6 9 12 15 18 9"/>

@@ -55,6 +55,40 @@
     --transition-slow: 0.5s ease;
 }
 
+.profile-avatar-square {
+    width: 100px;           /* Taille du carré */
+    aspect-ratio: 1 / 1;    /* Force le ratio carré */
+    overflow: hidden;       /* Coupe ce qui dépasse */
+    border-radius: 12px;    /* Coins légèrement arrondis pour le look moderne */
+    border: 2px solid rgba(255, 255, 255, 0.3); /* Effet verre */
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+}
+
+.profile-avatar-sidebar {
+    width: 50px;           /* Taille du carré */
+    aspect-ratio: 1 / 1;    /* Force le ratio carré */
+    overflow: hidden;       /* Coupe ce qui dépasse */
+    border-radius: 12px;    /* Coins légèrement arrondis pour le look moderne */
+    border: 2px solid rgba(255, 255, 255, 0.3); /* Effet verre */
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+}
+
+.profile-avatar-square img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;      /* Remplit le carré sans déformer l'image */
+    display: block;
+}
+
+.profile-avatar-sidebar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;      /* Remplit le carré sans déformer l'image */
+    display: block;
+}
+
 /* Light Mode */
 [data-theme="light"] {
     /* Glass Colors - Light */
