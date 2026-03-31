@@ -1,0 +1,1 @@
+<script src="{{ asset('back_auth/assets/js/templatemo-glass-admin-script.js') }}"></script>
