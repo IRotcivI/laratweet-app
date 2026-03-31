@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
+use Illuminate\Support\Facades\File;
 
 class ProfileController extends Controller
 {
@@ -32,9 +33,22 @@ class ProfileController extends Controller
             $request->user()->email_verified_at = null;
         }
 
+        if ($request->hasFile('image')) {
+            if (file_exists(public_path('back_auth/assets/profile'. $request->user()->image)) AND !empty($request->user()->image)){
+                unlink(public_path('back_auth/assets/profile'. $request->user()->image));
+            }
+
+            $ext = $request->file('image')->extension();
+            $fileName = date('YmdHis').'.'.$ext;
+            $request->file('image')->move(public_path('back_auth/assets/profile'), $fileName);
+            $request->user()->image = $fileName;
+        }
+        $request->user()->name = $request->name;
+        $request->user()->email = $request->email;
+
         $request->user()->save();
 
-        return Redirect::route('profile.edit')->with('status', 'profile-updated');
+        return Redirect::route('profile.edit')->with('status', 'Profil mis à jour.');
     }
 
     /**
