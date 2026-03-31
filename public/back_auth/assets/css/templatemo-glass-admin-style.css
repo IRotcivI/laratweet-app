@@ -55,6 +55,99 @@
     --transition-slow: 0.5s ease;
 }
 
+.status-toggle-container {
+    display: flex;
+    background: rgba(255, 255, 255, 0.05);
+    padding: 5px;
+    border-radius: 12px;
+    border: 1px solid var(--glass-border);
+    width: fit-content;
+    gap: 5px;
+}
+
+/* Cache le bouton radio par défaut */
+.status-toggle-container input[type="radio"] {
+    display: none;
+}
+
+/* Style de base des options */
+.status-option {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
+    color: var(--text-dim);
+    transition: all 0.3s ease;
+}
+
+/* Quand l'option Brouillon est cochée */
+#status-draft:checked + .status-option.draft {
+    background: rgba(212, 165, 116, 0.2); /* Couleur Gold de ton template */
+    color: var(--gold-light);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+}
+
+/* Quand l'option Public est cochée */
+#status-public:checked + .status-option.public {
+    background: rgba(5, 150, 105, 0.2); /* Couleur Emerald de ton template */
+    color: var(--emerald-light);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+}
+
+.status-option svg {
+    opacity: 0.6;
+}
+
+#status-public:checked + .status-option svg {
+    opacity: 1;
+}
+
+/* Cache l'input moche par défaut */
+.file-input-hidden {
+    width: 0.1px;
+    height: 0.1px;
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    z-index: -1;
+}
+
+/* Style du nouveau bouton Glassmorphism */
+.btn-file-glass {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 20px;
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: 12px;
+    color: var(--text-bright);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    width: fit-content;
+    font-size: 14px;
+}
+
+.btn-file-glass:hover {
+    background: var(--glass-hover);
+    border-color: var(--emerald);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+.btn-file-glass svg {
+    color: var(--emerald);
+}
+
+.card-actions {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
 .profile-avatar-square {
     width: 100px;           /* Taille du carré */
     aspect-ratio: 1 / 1;    /* Force le ratio carré */
