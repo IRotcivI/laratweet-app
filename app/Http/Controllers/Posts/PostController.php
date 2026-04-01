@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Requests\Posts\StorePostRequest;
 use App\Models\Post;
+use App\Models\Category;
 use Illuminate\Support\Facades\Auth;
 
 class PostController extends Controller
@@ -14,12 +15,15 @@ class PostController extends Controller
     {
         return view('back.posts.index', [
             'posts' => Post::all(),
+            'category' => Category::all(),
         ]);
     }
 
     public function create()
     {
-        return view('back.posts.create');
+        return view('back.posts.create', [
+            'category' => Category::latest()->get(),
+        ]);
     }
 
     public function store(StorePostRequest $request)
@@ -37,6 +41,7 @@ class PostController extends Controller
             'image' => $fileName,
             'content' => $validated['content'],
             'status' => $validated['status'] ?? 0,
+            'category_id' => $validated['category_id'],
             'user_id' => Auth::user()->id,
         ]); 
 
@@ -47,6 +52,7 @@ class PostController extends Controller
     {
         return view('back.posts.create', [
             'post' => $post,
+            'category' => Category::latest()->get(),
         ]);
     }
 
@@ -65,6 +71,7 @@ class PostController extends Controller
             'image' => $fileName,
             'content' => $validated['content'],
             'status' => $validated['status'] ?? 0,
+            'category_id' => $validated['category_id'],
         ]); 
 
         return redirect()->route('posts.index')->with('success', 'Post mis à jour avec succès !');

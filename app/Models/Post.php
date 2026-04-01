@@ -15,10 +15,16 @@ class Post extends Model
         'image',
         'status',
         'user_id',
+        'category_id',
     ];
 
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function category(): BelongsTo
+    {
+        return $this->belongsTo(Category::class);
     }
 }

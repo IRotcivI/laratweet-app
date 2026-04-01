@@ -79,6 +79,16 @@
                     </div>
 
                     <div class="form-group-settings">
+                        <label for="category_id">Catégorie</label>
+                            <select name="category_id" id="category_id" class="glass-input" style="width: 100%; background: var(--bg-dark); color: white; border: 1px solid var(--glass-border); padding: 10px; border-radius: 8px;">
+                            <option value="">-- Choisir une catégorie --</option>
+                            @foreach($category as $categories)
+                                <option @if(isset($post)) @selected($post->category_id == $categories->id) @endif value="{{ $categories->id }}"> {{ $categories->name}}</option>
+                            @endforeach
+                            </select>
+                        </div>
+
+                    <div class="form-group-settings">
                         <label>Visibilité du post</label>
                         <div class="status-toggle-container">
                             <input type="radio" name="status" id="status-draft" value="0" 

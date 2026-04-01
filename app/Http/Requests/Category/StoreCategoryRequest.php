@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Requests\Posts;
+namespace App\Http\Requests\Category;
 
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdatePostRequest extends FormRequest
+class StoreCategoryRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,10 +23,7 @@ class UpdatePostRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'content' => 'required|string|max:280',
-            'image' => 'nullable|image|max:2048|mimes:jpeg,png,jpg',
-            'status' => 'required',
-            'category_id' => 'required',
+            'name' => 'required|string|max:255',
         ];
     }
 }
