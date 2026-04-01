@@ -3,10 +3,9 @@
 namespace App\Http\Controllers\Posts;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use App\Http\Requests\Posts\StorePostRequest;
-use App\Models\Post;
 use App\Models\Category;
+use App\Models\Post;
 use Illuminate\Support\Facades\Auth;
 
 class PostController extends Controller
@@ -29,23 +28,27 @@ class PostController extends Controller
     public function store(StorePostRequest $request)
     {
         $validated = $request->validated();
-        
+
         $fileName = null;
         if ($request->hasFile('image')) {
             $ext = $request->file('image')->extension();
             $fileName = date('YmdHis').'.'.$ext;
             $request->file('image')->move(public_path('back_auth/assets/posts'), $fileName);
         }
-        
-        Post::create([
+
+        $tags = explode(',', $request->tags);
+
+        $post = Post::create([
             'image' => $fileName,
             'content' => $validated['content'],
-            'status' => $validated['status'] ?? 0,
+            'status' => $request->status ?? 0,
             'category_id' => $validated['category_id'],
-            'user_id' => Auth::user()->id,
-        ]); 
+            'user_id' => Auth::id(), 
+        ]);
 
-        return redirect()->route('posts.index')->with('success', 'Post créé avec succès !');
+        $post->tag($tags);
+
+        return redirect()->route('posts.index')->with('status', 'Post créé avec succès !');
     }
 
     public function edit(Post $post)
@@ -59,20 +62,24 @@ class PostController extends Controller
     public function update(StorePostRequest $request, Post $post)
     {
         $validated = $request->validated();
-        
+
         $fileName = $post->image;
         if ($request->hasFile('image')) {
             $ext = $request->file('image')->extension();
             $fileName = date('YmdHis').'.'.$ext;
             $request->file('image')->move(public_path('back_auth/assets/posts'), $fileName);
         }
-        
+
+        $tags = explode(',', $request->tags);
+
         $post->update([
             'image' => $fileName,
             'content' => $validated['content'],
             'status' => $validated['status'] ?? 0,
             'category_id' => $validated['category_id'],
-        ]); 
+        ]);
+
+        $post->retag($tags);
 
         return redirect()->route('posts.index')->with('success', 'Post mis à jour avec succès !');
     }
@@ -80,6 +87,7 @@ class PostController extends Controller
     public function destroy(Post $post)
     {
         $post->delete();
+
         return redirect()->route('posts.index')->with('success', 'Post supprimé avec succès !');
     }
 }

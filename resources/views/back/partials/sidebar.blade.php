@@ -1,13 +1,13 @@
 <!-- Sidebar -->
 <aside class="sidebar" id="sidebar">
     <div class="sidebar-header">
-        <div class="logo">G</div>
-        <span class="logo-text">GlassDash</span>
+        <div class="logo">LT</div>
+        <span class="logo-text">Laratweet</span>
     </div>
 
     <ul class="nav-menu">
         <li class="nav-section">
-            <span class="nav-section-title">Main Menu</span>
+            <span class="nav-section-title">Menu</span>
             <ul>
                 <li class="nav-item">
                     <a href="index.html" class="nav-link">
