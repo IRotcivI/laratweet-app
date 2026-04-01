@@ -27,6 +27,7 @@ class UpdatePostRequest extends FormRequest
             'image' => 'nullable|image|max:2048|mimes:jpeg,png,jpg',
             'status' => 'required',
             'category_id' => 'required',
+            'tags' => 'nullable|string',
         ];
     }
 }
