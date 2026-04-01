@@ -7,7 +7,7 @@
                 <div class="page-header">
                     <h1 class="page-title">Posts</h1>
                     <div class="page-breadcrumb">
-                        <a href="index.html">Dashboard</a>
+                        <a href="{{ route('dashboard') }}">Dashboard</a>
                         <span>/</span>
                         <span>Posts</span>
                     </div>
