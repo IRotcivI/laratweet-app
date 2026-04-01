@@ -1,22 +1,22 @@
 @extends('back.app')
 
-@section('title', 'Posts')
+@section('title', 'Categories')
 
 @section('header')
     <nav class="navbar">
                 <div class="page-header">
-                    <h1 class="page-title">Posts</h1>
+                    <h1 class="page-title">Categories</h1>
                     <div class="page-breadcrumb">
-                        <a href="index.html">Dashboard</a>
+                        <a href="{{ route('dashboard') }}">Dashboard</a>
                         <span>/</span>
-                        <span>Posts</span>
+                        <span>Categories</span>
                     </div>
 
                     @if (session('status'))
-                            <div class="alert alert-success" style="margin-top: 30px;">
-                                {{ session('status') }}
-                            </div>
-                        @endif
+                        <div class="alert alert-success" style="margin-top: 30px;">
+                            {{ session('status') }}
+                        </div>
+                    @endif
 
                 </div>
                 <div class="navbar-right">
@@ -39,12 +39,12 @@
 <div class="glass-card table-card">
     <div class="card-header">
         <div class="card-info">
-            <h3 class="card-title">Liste des Posts</h3>
-            <p class="card-subtitle">Gérez les publications récentes</p>
+            <h3 class="card-title">Liste des Catégories</h3>
+            <p class="card-subtitle">Gérez les catégories récentes</p>
         </div>
         <div class="card-actions">
-            <a href="{{ route('posts.create') }}" class="btn btn-primary" style="padding: 8px 16px; font-size: 13px;">
-                + Nouveau Post
+            <a href="{{ route('category.create') }}" class="btn btn-primary" style="padding: 8px 16px; font-size: 13px;">
+                + Nouvelle Catégorie
             </a>
         </div>
     </div>
@@ -53,54 +53,30 @@
         <table class="data-table">
             <thead>
                 <tr>
-                    <th>Image</th>
-                    <th>Contenu</th>
-                    <th>Catégorie</th>
-                    <th>Auteur</th>
+                    <th>ID</th>
+                    <th>Nom</th>
                     <th>Date</th>
-                    <th>Statut</th>
                     <th>Actions</th>
                 </tr>
             </thead>
             <tbody>
-                @foreach($posts as $post)
+                @foreach($category as $categories)
                 <tr>
-                    <td>
-                        <div class="profile-avatar-sidebar">
-                            <img src="{{ $post->image ? asset('back_auth/assets/posts/' . $post->image) : asset('images/default-post.jpg') }}" alt="Post image">
-                        </div>
-                    </td>
+                    <td>{{ $categories->id }}</td>
                     <td>
                         <div class="table-user-info">
-                            <span class="table-user-email">{{ Str::limit($post->content, 50) }}</span>
+                            <span class="table-user-email">{{ $categories->name }}</span>
                         </div>
                     </td>
                     <td>
-                        <div class="table-user-info">
-                            <span class="table-user-email">{{ $post->category ? $post->category->name : 'Aucune catégorie' }}</span>
-                        </div>
-                    </td>
-                    <td>
-                        <div class="table-user-info">
-                            <span class="table-user-email">{{ $post->user->name }}</span>
-                        </div>
-                    </td>
-                    <td>
-                        <div class="table-amount">{{ $post->created_at->format('d/m/Y') }}</div>
-                    </td>
-                    <td>
-                        @if($post->status == 1)
-                            <span class="status-badge completed">Publié</span>
-                        @else
-                            <span class="status-badge pending">Brouillon</span>
-                        @endif
+                        <div class="table-amount">{{ $categories->created_at->format('d/m/Y') }}</div>
                     </td>
                     <td>
                         <div class="card-actions">
-                            <a href="{{ route('posts.edit', $post) }}" class="nav-btn" title="Modifier">
+                            <a href="{{ route('category.edit', $categories) }}" class="nav-btn" title="Modifier">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>
                             </a>
-                            <form action="{{ route('posts.destroy', $post) }}" method="POST" onsubmit="return confirm('Supprimer ce post ?')">
+                            <form action="{{ route('category.destroy', $categories) }}" method="POST" onsubmit="return confirm('Supprimer cette catégorie ?')">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="nav-btn" style="color: var(--danger); border-color: rgba(220, 38, 38, 0.2);">

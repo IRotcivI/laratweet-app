@@ -21,4 +21,7 @@ Route::middleware('auth')->group(function () {
 //Posts routes
 Route::resource('posts', \App\Http\Controllers\Posts\PostController::class)->middleware('auth');
 
+//Categories routes
+Route::resource('category', \App\Http\Controllers\Category\CategoryController::class)->middleware('auth');
+
 require __DIR__.'/auth.php';
