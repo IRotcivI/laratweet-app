@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,42 +8,46 @@
     <meta name="description" content="3D Glassmorphism Dashboard Template by TemplateMo">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('back_auth/assets/css/templatemo-glass-admin-style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/izitoast/1.4.0/css/iziToast.min.css"
+        integrity="sha512-O03ntXoVqaGUTAeAmvQ2YSzkCvclZEcPQu1eqloPaHfJ5RuNGiS4l+3duaidD801P50J28EHyonCV06CUlTSag=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
 
     <style>
         .colored-toast.swal2-icon-success {
-        background-color: #a5dc86 !important;
+            background-color: #a5dc86 !important;
         }
 
         .colored-toast.swal2-icon-error {
-        background-color: #f27474 !important;
-        }   
+            background-color: #f27474 !important;
+        }
 
         .colored-toast.swal2-icon-warning {
-        background-color: #f8bb86 !important;
+            background-color: #f8bb86 !important;
         }
 
         .colored-toast.swal2-icon-info {
-        background-color: #3fc3ee !important;
-        }   
+            background-color: #3fc3ee !important;
+        }
 
         .colored-toast.swal2-icon-question {
-        background-color: #87adbd !important;
+            background-color: #87adbd !important;
         }
 
         .colored-toast .swal2-title {
-        color: white;
+            color: white;
         }
 
         .colored-toast .swal2-close {
-        color: white;
+            color: white;
         }
 
         .colored-toast .swal2-html-container {
-        color: white;
+            color: white;
         }
-
     </style>
 
 </head>
@@ -58,13 +63,19 @@
         <!-- Theme Toggle -->
         <button class="theme-toggle-float" id="theme-toggle" title="Toggle Light/Dark Mode">
             <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/>
-                <path d="M4.93 4.93l1.41 1.41"/><path d="M17.66 17.66l1.41 1.41"/>
-                <path d="M2 12h2"/><path d="M20 12h2"/>
-                <path d="M6.34 17.66l-1.41 1.41"/><path d="M19.07 4.93l-1.41 1.41"/>
+                <circle cx="12" cy="12" r="4" />
+                <path d="M12 2v2" />
+                <path d="M12 20v2" />
+                <path d="M4.93 4.93l1.41 1.41" />
+                <path d="M17.66 17.66l1.41 1.41" />
+                <path d="M2 12h2" />
+                <path d="M20 12h2" />
+                <path d="M6.34 17.66l-1.41 1.41" />
+                <path d="M19.07 4.93l-1.41 1.41" />
             </svg>
-            <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display: none;">
-                <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+            <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                style="display: none;">
+                <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
             </svg>
         </button>
 
@@ -90,5 +101,38 @@
 
     <script src="{{ asset('back_auth/assets/js/templatemo-glass-admin-script.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/izitoast/1.4.0/js/iziToast.min.js"
+        integrity="sha512-Zq9o+E00xhhR/7vJ49mxFNJ0KQw1E1TMWkPTxrWcnpfEFDEXgUiwJHIKit93EW/XxE31HSI5GEOW06G6BF1AtA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <!-- Scripts (link) -->
+    @include('back.partials.scripts')
+
+    @if (session()->get('error'))
+        <script>
+            iziToast.error({
+                class: 'glass-toast',
+                backgroundColor: 'rgba(5, 150, 105, 0.3)',
+                progressBarColor: '#10b981',
+                title: 'Erreur',
+                position: 'topRight',
+                message: '{{ session()->get('error') }}'
+            });
+        </script>
+    @endif
+
+    @if (session()->get('success'))
+        <script>
+            iziToast.success({
+                class: 'glass-toast',
+                backgroundColor: 'rgba(5, 150, 105, 0.3)',
+                progressBarColor: '#10b981',
+                title: 'Succès',
+                position: 'topRight',
+                message: '{{ session()->get('success') }}'
+            });
+        </script>
+    @endif
+    <!-- End scripts -->
 </body>
+
 </html>

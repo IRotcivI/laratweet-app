@@ -54,6 +54,28 @@
     --transition-normal: 0.3s ease;
     --transition-slow: 0.5s ease;
 }
+
+/* On cible l'élément généré par iziToast */
+.iziToast.glass-toast {
+    backdrop-filter: blur(12px) !important;
+    -webkit-backdrop-filter: blur(12px) !important;
+    background-color: rgba(255, 255, 255, 0.05) !important; /* Fond neutre très léger */
+    border: 1px solid rgba(255, 255, 255, 0.15) !important;
+    border-radius: 9px !important;
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3) !important;
+}
+
+/* Forcer la couleur du texte et du titre */
+.iziToast.glass-toast .iziToast-texts strong, 
+.iziToast.glass-toast .iziToast-texts p {
+    color: white !important;
+}
+
+/* Ajuster la barre de progression pour le style Émeraude */
+.iziToast.glass-toast .iziToast-progressbar > div {
+    background: #10b981 !important; /* Vert émeraude */
+}
+
 /* Conteneur des badges sous l'input */
 .tags-display-container {
     display: flex;

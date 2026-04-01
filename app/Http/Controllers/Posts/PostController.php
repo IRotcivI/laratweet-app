@@ -12,8 +12,14 @@ class PostController extends Controller
 {
     public function index()
     {
+        if (Auth::user()->role == 'admin') {
+            $posts = Post::all();
+        } else {
+            $posts = Post::where('user_id', Auth::id())->get();
+        }
+
         return view('back.posts.index', [
-            'posts' => Post::all(),
+            'posts' => $posts,
             'category' => Category::all(),
         ]);
     }
@@ -43,7 +49,7 @@ class PostController extends Controller
             'content' => $validated['content'],
             'status' => $request->status ?? 0,
             'category_id' => $validated['category_id'],
-            'user_id' => Auth::id(), 
+            'user_id' => Auth::id(),
         ]);
 
         $post->tag($tags);
