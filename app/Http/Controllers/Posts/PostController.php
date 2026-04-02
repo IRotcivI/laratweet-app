@@ -45,6 +45,7 @@ class PostController extends Controller
         $tags = explode(',', $request->tags);
 
         $post = Post::create([
+            'title' => $validated['title'],
             'image' => $fileName,
             'content' => $validated['content'],
             'status' => $request->status ?? 0,
@@ -79,6 +80,7 @@ class PostController extends Controller
         $tags = explode(',', $request->tags);
 
         $post->update([
+            'title' => $validated['title'],
             'image' => $fileName,
             'content' => $validated['content'],
             'status' => $validated['status'] ?? 0,

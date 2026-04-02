@@ -23,7 +23,8 @@ class StorePostRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'content' => 'required|string|max:280',
+            'title' => 'nullable|string|max:255',
+            'content' => 'required|string|max:2000',
             'image' => 'nullable|image|max:2048|mimes:jpeg,png,jpg',
             'status' => 'nullable|in:0,1',
             'category_id' => 'required',
