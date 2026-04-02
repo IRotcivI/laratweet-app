@@ -66,6 +66,23 @@
                         @method('PUT')
                     @endif
 
+                    <div class="form-group-settings" style="margin-bottom: 25px;">
+                        <label for="title"
+                            style="display: block; margin-bottom: 10px; color: var(--gold-light); font-weight: 500; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px;">
+                            Titre de l'article
+                        </label>
+
+                        <input type="text" id="title" name="title" class="glass-input"
+                                placeholder="Entrez un titre..." autocomplete="off">
+
+                        @error('title')
+                            <span class="invalid-feedback"
+                                style="color: var(--coral); font-size: 0.8rem; margin-top: 5px; display: block;">
+                                {{ $message }}
+                            </span>
+                        @enderror
+                    </div>
+
                     <div class="form-grid">
                         <div class="form-group-settings" style="grid-column: 1 / -1;">
                             <label for="content">Contenu du post</label>
@@ -109,7 +126,8 @@
                         <div class="form-group-settings">
                             <label for="category_id">Catégorie</label>
                             <select name="category_id" id="category_id" class="glass-input"
-                                style="width: 100%; background: var(--bg-dark); color: white; border: 1px solid var(--glass-border); padding: 10px; border-radius: 8px;" required>
+                                style="width: 100%; background: var(--bg-dark); color: white; border: 1px solid var(--glass-border); padding: 10px; border-radius: 8px;"
+                                required>
                                 <option value="">-- Choisir une catégorie --</option>
                                 @foreach ($category as $categories)
                                     <option @if (isset($post)) @selected($post->category_id == $categories->id) @endif
