@@ -14,38 +14,46 @@
 @endsection
 
 @section('content')
-    <section class="posts-grid">
-        @foreach ($posts as $post)
-            <article class="glass-card glass-card-3d post-card">
-                @if ($post->image)
-                    <img src="{{ asset('back_auth/assets/posts/' . $post->image) }}" alt="{{ $post->title }}" class="post-image">
-                @else
-                    <div class="post-image"
-                        style="background: var(--bg-gradient-3); display: flex; align-items: center; justify-content: center;">
-                        <span style="color: var(--glass-border)">Pas d'image</span>
-                    </div>
-                @endif
+    <div class="container">
 
-                <div class="post-content">
-                    <span class="post-category">{{ $post->category->name ?? 'Général' }}</span>
-                    <h2 class="card-title" style="margin: 10px 0;">{{ Str::limit($post->title, 50) }}</h2>
-                    <p class="card-subtitle">{{ Str::limit(strip_tags($post->content), 100) }}</p>
+        <section class="posts-grid">
+            @foreach ($posts as $post)
+                <article class="glass-card {{ $loop->first ? 'featured-post' : '' }}">
 
-                    <div class="post-meta" style="margin-top: 15px; font-size: 0.8rem; color: var(--text-secondary);">
-                        <span>Par <strong>{{ $post->user->name }}</strong></span> •
-                        <span>{{ $post->created_at->translatedFormat('d M Y') }}</span>
+                    {{-- On enveloppe l'image pour mieux la contrôler en CSS --}}
+                    <div class="card-image-wrapper">
+                        @if ($post->image)
+                            <img src="{{ asset('back_auth/assets/posts/' . $post->image) }}" alt="{{ $post->title }}"
+                                class="post-image">
+                        @else
+                            <div class="post-image"
+                                style="background: var(--bg-gradient-3); display: flex; align-items: center; justify-content: center;">
+                                <span style="color: var(--glass-border)">Pas d'image</span>
+                            </div>
+                        @endif
                     </div>
 
-                    <div class="post-tags">
-                        @foreach ($post->tags as $tag)
-                            <span class="tag-pill">#{{ $tag->name }}</span>
-                        @endforeach
-                    </div>
+                    <div class="post-content">
+                        <span class="post-category">{{ $post->category->name ?? 'Général' }}</span>
+                        <h2 class="card-title" style="margin: 10px 0;">{{ Str::limit($post->title, 50) }}</h2>
+                        <p class="card-subtitle">{{ Str::limit(strip_tags($post->content), 100) }}</p>
 
-                    <a href="{{ route('show', $post->slug) }}" class="card-btn active"
-                        style="margin-top: 20px; display: block; text-align: center;">Lire l'article</a>
-                </div>
-            </article>
-        @endforeach
-    </section>
-@endsection
+                        <div class="post-meta" style="margin-top: 15px; font-size: 0.8rem; color: var(--text-secondary);">
+                            <span>Par <strong>{{ $post->user->name }}</strong></span> •
+                            <span>{{ $post->created_at->translatedFormat('d M Y') }}</span>
+                        </div>
+
+                        <div class="post-tags">
+                            @foreach ($post->tags as $tag)
+                                <span class="tag-pill">#{{ $tag->name }}</span>
+                            @endforeach
+                        </div>
+
+                        <a href="{{ route('show', $post->slug) }}" class="card-btn active"
+                            style="margin-top: 20px; display: block; text-align: center;">Lire l'article</a>
+                    </div>
+                </article>
+            @endforeach
+        </section>
+
+</div> @endsection

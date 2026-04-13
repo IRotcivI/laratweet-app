@@ -481,7 +481,6 @@ a {
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
     border-right: 1px solid var(--glass-border);
-    padding: 24px;
     z-index: 100;
     transition: all var(--transition-normal);
     overflow-y: auto;
@@ -2545,4 +2544,97 @@ a {
 
 .login-card {
     animation: fadeInUp 0.6s ease-out;
+}
+
+/* --- CONFIGURATION SIDEBAR --- */
+.sidebar {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    bottom: 20px;
+    width: 260px; /* Largeur de ta sidebar */
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    padding: 30px 20px;
+    border-radius: 20px;
+    /* Glassmorphism déjà inclus dans ta classe .glass-card */
+}
+
+.sidebar-content {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.nav-links {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 30px;
+    flex-grow: 1;
+}
+
+.nav-item {
+    text-decoration: none;
+    color: var(--text-secondary, #cbd5e1);
+    padding: 12px 15px;
+    border-radius: 12px;
+    transition: 0.3s;
+    font-weight: 500;
+}
+
+.nav-item:hover, .nav-item.active {
+    background: rgba(16, 185, 129, 0.2);
+    color: #fff;
+    border: 1px solid rgba(16, 185, 129, 0.3);
+}
+
+.nav-section-title {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--gold-light, #fbbf24);
+    margin: 20px 0 10px 15px;
+    opacity: 0.7;
+}
+
+/* --- AJUSTEMENT DU CONTENU PRINCIPAL --- */
+.main-content {
+    margin-left: 300px; /* Largeur sidebar (260) + Espace (40) */
+    width: calc(100% - 300px);
+    transition: 0.3s;
+}
+
+/* --- RESPONSIVE : Sur mobile, on repasse en haut ou on cache --- */
+@media (max-width: 1024px) {
+    .sidebar {
+        display: none; /* Tu pourras faire un menu burger plus tard */
+    }
+    .main-content {
+        margin-left: 0;
+        width: 100%;
+    }
+}
+
+.nav-links {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 30px;
+    flex-grow: 1;
+    
+    /* On ajoute ça pour gérer le surplus */
+    overflow-y: auto; 
+    max-height: calc(100vh - 200px); /* On limite la hauteur pour laisser de la place au logo/footer */
+    padding-right: 10px; /* Petit espace pour ne pas coller à la barre de scroll */
+}
+
+/* Optionnel : Personnaliser la barre de scroll pour qu'elle soit discrète (style émeraude) */
+.nav-links::-webkit-scrollbar {
+    width: 5px;
+}
+.nav-links::-webkit-scrollbar-thumb {
+    background: rgba(16, 185, 129, 0.3);
+    border-radius: 10px;
 }

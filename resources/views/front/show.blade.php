@@ -2,8 +2,12 @@
 
 @section('title', 'Détails du post')
 
+@section('sidebar')
+    @include('front.partials.sidebar')
+@endsection
+
 @section('content')
-    <div class="post-container" style="max-width: 850px; margin: 0 auto; padding: 20px;">
+    <div class="post-container " style="max-width: 850px; margin: 0 auto; padding: 20px;">
 
         <a href="{{ url('/') }}" class="back-link"
             style="display: inline-flex; align-items: center; gap: 10px; color: var(--gold-light); text-decoration: none; margin-bottom: 30px; font-weight: 500; transition: 0.3s;">
