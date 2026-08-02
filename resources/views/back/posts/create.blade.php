@@ -73,6 +73,7 @@
                         </label>
 
                         <input type="text" id="title" name="title" class="glass-input"
+                        value="{{ isset($post) ? $post->title : old('title') }}"
                                 placeholder="Entrez un titre..." autocomplete="off">
 
                         @error('title')
